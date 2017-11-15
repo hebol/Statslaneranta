@@ -1,10 +1,11 @@
 var express = require('express');
-var fs = require('fs');
+var fs      = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
+var moment  = require('moment');
 var app     = express();
 
-var data = [], latestRun;
+var data = {};
 
 app.use(express.static('public'));
 app.use(express.static('bower_components'));
@@ -13,36 +14,45 @@ app.get('/', function(req, res){
   res.redirect('/index.html');
 });
 
-app.get('/scrape', function(req, res){
+app.get('/scrape/:year', function(req, res){
 
-  const url = 'https://www.riksgalden.se/sv/omriksgalden/statsskulden/statslanerantan/';
+  const year = req.params.year;
+  const url = 'https://www.riksgalden.se/sv/omriksgalden/statsskulden/statslanerantan/?year=' + year;
 
   function sendData() {
-    res.send(JSON.stringify(data, null, 2));
+    const value = data[year].data;
+    //console.log('Will send data', value, 'for', year);
+    res.send(JSON.stringify(value, null, 2));
   }
 
-  if (!latestRun || latestRun.getTime() < new Date().getTime() - 10 * 1000) {
-    console.log('Running query');
-    data = [];
-    request(url, function(error, response, html){
+  if (!data.hasOwnProperty(year) || data[year].latestRun.getTime() < new Date().getTime() - 10 * 1000) {
+    console.log('Running query', year);
+    var dataResponse = [];
+    request(url, function(error, response, html) {
       if(!error){
         var $ = cheerio.load(html);
 
         $('tr').filter(function(){
           var row = $(this);
 
-          data.push({
+          dataResponse.push({
             date: row.children().first().text(),
             rate: row.children().first().next().text()
           });
         });
+      } else {
+        console.log('Error retrieving year', year, error);
       }
 
-      latestRun = new Date();
+      data[year] = {
+        data: dataResponse,
+        latestRun: new Date()
+      };
+      //console.log('Data is now', data, 'when adding', dataResponse, 'for', year);
       sendData();
     });
   } else {
-    console.log('Sending cached data');
+    console.log('Sending cached data', year);
     sendData();
   }
 });

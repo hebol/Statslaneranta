@@ -8,6 +8,7 @@
     "bower": "^1.8.2",
     "cheerio": "latest",
     "express": "latest",
+    "moment": "^2.19.2",
     "request": "latest"
   },
   "scripts": {
