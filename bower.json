@@ -1,0 +1,21 @@
+{
+  "name": "Statslaneranta",
+  "description": "Visualisera aktuell statslåneränta",
+  "main": "server.js",
+  "authors": [
+    "Hebol"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chart.js": "chartjs#^2.7.1",
+    "jquery": "^3.2.1"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "Statslaneranta",
+  "version": "0.0.1",
+  "description": "Visualisera aktuell statslåneränta",
+  "main": "server.js",
+  "author": "Scotch",
+  "dependencies": {
+    "express": "latest",
+    "request": "latest",
+    "cheerio": "latest"
+  }
+}
