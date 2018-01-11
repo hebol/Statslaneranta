@@ -25,7 +25,7 @@ app.get('/scrape/:year', function(req, res){
     res.send(JSON.stringify(value, null, 2));
   }
 
-  if (!data.hasOwnProperty(year) || data[year].latestRun.getTime() < new Date().getTime() - 10 * 1000) {
+  if (!data.hasOwnProperty(year) || data[year].latestRun.getTime() < new Date().getTime() - 3600 * 1000) {
     console.log('Running query', year);
     var dataResponse = [];
     request(url, function(error, response, html) {
