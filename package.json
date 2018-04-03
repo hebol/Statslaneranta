@@ -5,10 +5,10 @@
   "main": "server.js",
   "author": "Scotch",
   "dependencies": {
-    "bower": "^1.8.2",
+    "bower": "^1.8.4",
     "cheerio": "latest",
     "express": "latest",
-    "moment": "^2.19.2",
+    "moment": "^2.22.0",
     "request": "latest"
   },
   "scripts": {
