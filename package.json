@@ -5,11 +5,12 @@
   "main": "server.js",
   "author": "Scotch",
   "dependencies": {
-    "bower": "^1.8.4",
+    "bower": "^1.8.8",
     "cheerio": "latest",
-    "express": "latest",
-    "moment": "^2.22.0",
-    "request": "latest"
+    "express": "^4.16.4",
+    "moment": "^2.24.0",
+    "npm": "^6.8.0",
+    "request": "^2.88.0"
   },
   "scripts": {
     "postinstall": "./node_modules/bower/bin/bower install"
